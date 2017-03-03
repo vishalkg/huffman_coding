@@ -8,8 +8,8 @@ import java.util.ArrayList;
 public class Gen_huffman_code {
 
 	public static void gen_codes(Node n, String code){
-		System.out.println("Curr Node Freq: "+n.get_freq());
-		if (n.get_left()==null && n.get_right()==null){
+		//System.out.println("Curr Node Freq: "+n.get_freq());
+		if (n.get_msg() != -1){
 			System.out.println(n.get_msg()+"==>"+code);
 			return;
 		}
@@ -33,9 +33,13 @@ public class Gen_huffman_code {
 		 ** Now we will combine all to build a single huffman tree		**/
 		while (min_heap.heap_size != 1){
 			Node internal = new Node(0,-1);
-			internal.set_left(min_heap.del_min());//min1.set_parent(internal);
-			internal.set_right(min_heap.del_min());//min2.set_parent(internal); 
+			internal.set_left(min_heap.del_min());internal.get_left().set_parent(internal);
+			internal.set_right(min_heap.del_min());internal.get_right().set_parent(internal);
 			internal.set_freq(internal.get_left().get_freq()+internal.get_right().get_freq());
+			System.out.println(internal.get_left().get_freq()+
+					":"+internal.get_left().get_msg()+
+					"|"+internal.get_right().get_freq()+
+					":"+internal.get_right().get_msg());
 			min_heap.insert(internal);
 		}
 		String code = "";

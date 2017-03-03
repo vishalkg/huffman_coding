@@ -45,12 +45,12 @@ class BinaryHeap {
 	}
 	
 	public Node del_min(){
-		Node min_node = new Node(0,0);
+		
 		if (is_empty())
 			return null;
 		else{
-			min_node.set_freq(data[0].get_freq());
-			min_node.set_msg(data[0].get_msg());
+			Node min_node = new Node(0,-1);
+			min_node = data[0];
 			data[0] = data[heap_size-1];
 			heap_size--;
 			if (heap_size>0)
@@ -61,10 +61,10 @@ class BinaryHeap {
 	
 	private void manage_heap_upwards(int node_index){
 		int parent_index;
-		Node temp = new Node(0,0);
+		Node temp = new Node(0,-1);
 		if (node_index!=0){
 			parent_index = get_parent_index(node_index);
-			if (data[parent_index].get_freq() > data[node_index].get_freq()){
+			if (data[parent_index].get_freq() >= data[node_index].get_freq()){
 				temp = data[parent_index];
 				data[parent_index] = data[node_index];
 				data[node_index] = temp;
@@ -75,7 +75,7 @@ class BinaryHeap {
 	
 	private void manage_heap_downwards(int node_index){
 		int l_index,r_index,min_index;
-		Node temp = new Node(0,0);
+		Node temp = new Node(0,-1);
 		l_index = get_left_child_index(node_index);
 		r_index = get_right_child_index(node_index);
 		if (r_index>=heap_size){
@@ -85,12 +85,12 @@ class BinaryHeap {
 				min_index = l_index;
 		}
 		else {
-			if (data[l_index].get_freq() < data[r_index].get_freq())
+			if (data[l_index].get_freq() <= data[r_index].get_freq())
 				min_index = l_index;
 			else
 				min_index = r_index;
 		}
-		if (data[node_index].get_freq()>data[min_index].get_freq()){
+		if (data[node_index].get_freq() > data[min_index].get_freq()){
 			temp = data[min_index];
 			data[min_index] = data[node_index];
 			data[node_index] = temp;
