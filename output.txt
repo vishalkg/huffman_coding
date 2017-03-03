@@ -1,4 +1,0 @@
-Reading input file ... Done.
-Building Huffman Tree using Binary Heap ... 
-Trial:1..  Done
-Average Time: 2.0
