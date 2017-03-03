@@ -6,31 +6,40 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Gen_huffman_code {
+
+	public static void gen_codes(Node n, String code){
+		System.out.println("Curr Node Freq: "+n.get_freq());
+		if (n.get_left()==null && n.get_right()==null){
+			System.out.println(n.get_msg()+"==>"+code);
+			return;
+		}
+		else{
+			gen_codes(n.get_left(),code+"0");
+			gen_codes(n.get_right(),code+"1");
+		}
+	}
 	
 	public static void build_tree_using_binary_heap(int[][] freq_table) {
 		
-		/** Initially create a list of binary heaps with single **
-		 ** node in the order of increasing frequencies			**/
-		ArrayList<BinaryHeap> x = new ArrayList<BinaryHeap>();
+		/** Initially create a min heap with single node trees **/
+		BinaryHeap min_heap = new BinaryHeap(freq_table.length);
 		for (int i=0;i<freq_table.length;i++){
-			BinaryHeap bh = new BinaryHeap();
-			if (i==0)
-				x.add(bh);
-			else {
-				for (int j=0;j<x.size();j++){
-					if ((bh.key)<=x.get(j).key) {
-						x.add(j,bh);
-						break;
-					}
-				}
-			}
+			Node n = new Node(freq_table[i][0], freq_table[i][1]);
+			min_heap.insert(n);
+			//System.out.println(min_heap.get_root().get_freq());
 		}
 		
-		/** Now we have a list of binary heaps having single nodes only	**
-		 ** Now we will combine all to build a single binary heap		**/
-		while (x.size() != 1){
-			
+		/** Now we have a min heap of trees having single nodes only	**
+		 ** Now we will combine all to build a single huffman tree		**/
+		while (min_heap.heap_size != 1){
+			Node internal = new Node(0,-1);
+			internal.set_left(min_heap.del_min());//min1.set_parent(internal);
+			internal.set_right(min_heap.del_min());//min2.set_parent(internal); 
+			internal.set_freq(internal.get_left().get_freq()+internal.get_right().get_freq());
+			min_heap.insert(internal);
 		}
+		String code = "";
+		gen_codes(min_heap.get_root(),code);
 	}
 	
 	public static void main (String[] args) throws InterruptedException, IOException {
@@ -75,7 +84,7 @@ public class Gen_huffman_code {
 		/****************** Binary Heap ******************/
 		{
 			startTime = System.currentTimeMillis();
-			for (int i=0;i<10;i++) {
+			for (int i=0;i<1;i++) {
 				build_tree_using_binary_heap(freq_table);
 			}
 			endTime   = System.currentTimeMillis();
