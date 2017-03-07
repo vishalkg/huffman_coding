@@ -7,9 +7,8 @@ public class PairNode {
 	private PairNode next;
 	private PairNode prev;
 	
-	public PairNode (int freq, int message) {
-		this.n.set_freq(freq);
-		this.n.set_msg(message);
+	public PairNode (Node x) {
+		this.n = x;
 		this.l = null;
 		this.next = null;
 		this.prev = null;
