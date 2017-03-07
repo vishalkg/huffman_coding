@@ -6,20 +6,22 @@ public class PairNode {
 	private int message = -1;
 	private PairNode l;
 	private PairNode next;
+	private PairNode prev;
 	
 	public PairNode (int freq, int message) {
 		this.freq = freq;
 		this.message = message;
 		this.l = null;
 		this.next = null;
+		this.prev = null;
 	}
 	
-	public int get_freq(PairNode x) {
-		return x.freq;
+	public int get_freq() {
+		return this.freq;
 	}
 	
-	public int get_msg(PairNode x) {
-		return x.message;
+	public int get_msg() {
+		return this.message;
 	}
 	
 	public void set_freq(int freq){
@@ -44,5 +46,13 @@ public class PairNode {
 	
 	public void set_next(PairNode x){
 		this.next = x;
+	}
+	
+	public PairNode get_prev(){
+		return this.prev;
+	}
+	
+	public void set_prev(PairNode x){
+		this.set_prev(x);
 	}
 }
