@@ -1,7 +1,5 @@
 package huffman_code;
 
-import java.util.ArrayList;
-
 class PairingHeap {
 	
 	public void stub(){
