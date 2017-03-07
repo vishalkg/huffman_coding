@@ -11,7 +11,7 @@ public class Gen_huffman_code {
 	public static void gen_codes(Node n, String code){
 		//System.out.println("Curr Node Freq: "+n.get_freq());
 		if (n.get_msg() != -1){
-			//System.out.println(n.get_msg()+"==>"+code);
+			System.out.println(n.get_msg()+"==>"+code);
 			return;
 		}
 		else{
@@ -20,9 +20,39 @@ public class Gen_huffman_code {
 		}
 	}
 	
+	public static void build_tree_using_pairing_heap(int[] freq_table) {
+		/** Initially create a min pairing heap with single node trees **/
+		PairingHeap min_pairingheap = new PairingHeap();
+		for (int i=0;i<freq_table.length;i++){
+			if (freq_table[i]!=0){
+				Node n = new Node(freq_table[i], i);
+				System.out.println("freq: "+n.get_freq()+"|msg: "+n.get_msg());
+				min_pairingheap.insert(n);
+			}
+		}
+		
+		/** Now we have a min heap of trees having single nodes only	**
+		 ** Now we will combine all to build a single huffman tree		**/
+		while(min_pairingheap.get_root().get_left()!=null){
+			Node internal = new Node(0,-1);
+			internal.set_left(min_pairingheap.del_min());internal.get_left().set_parent(internal);
+			internal.set_right(min_pairingheap.del_min());internal.get_right().set_parent(internal);
+			internal.set_freq(internal.get_left().get_freq()+internal.get_right().get_freq());
+			/**/
+			System.out.println(internal.get_left().get_freq()+
+					":"+internal.get_left().get_msg()+
+					"|"+internal.get_right().get_freq()+
+					":"+internal.get_right().get_msg());
+			/**/
+			min_pairingheap.insert(internal);
+		}
+		String code = "";
+		gen_codes(min_pairingheap.get_root().get_node(),code);
+	}
+	
 	public static void build_tree_using_binary_heap(int[] freq_table) {
 		
-		/** Initially create a min heap with single node trees **/
+		/** Initially create a min binary heap with single node trees **/
 		BinaryHeap min_heap = new BinaryHeap(freq_table.length);
 		for (int i=0;i<freq_table.length;i++){
 			if (freq_table[i]!=0){
@@ -72,8 +102,10 @@ public class Gen_huffman_code {
 			}
 		}
 		System.out.print("Done.\n");
-				
+		
 		long startTime,endTime;
+		final boolean DEBUG = false;
+		if (DEBUG) {
 		/****************** Binary Heap ******************/
 		{
 			System.out.print("Building Huffman Tree using Binary Heap ... \nTrial:");
@@ -86,25 +118,26 @@ public class Gen_huffman_code {
 			endTime   = System.currentTimeMillis();
 			double totalTime_BH = (endTime - startTime)/10;
 			System.out.println("Average Time: "+totalTime_BH);
-		}
+		}}
 		
-		final boolean DEBUG = false;
-		if (DEBUG) {
+		
 		/*******************4 Way Heap********************/
 		{
+			System.out.print("Building Huffman Tree using Pairing Heap ... \nTrial:");
 			startTime = System.currentTimeMillis();
-			
-			FourWayHeap nWH_4 = new FourWayHeap();
-			for (int i=0;i<10;i++) {
-				//System.out.println("Stub Function\n");
-				Thread.sleep(50);
-				nWH_4.stub();
+			int num_trials = 1;
+			for (int i=0;i<num_trials;i++) {
+				System.out.print((i+1)+".. ");
+				build_tree_using_pairing_heap(freq_table);
 			}
+			System.out.print(" Done\n");
 			endTime   = System.currentTimeMillis();
-			double totalTime_4WH = (endTime - startTime)/10;
-			System.out.println(totalTime_4WH);
+			double totalTime_BH = (endTime - startTime)/num_trials;
+			System.out.println("Average Time: "+totalTime_BH);
 		}
 		
+		
+		if (DEBUG) {
 		/*******************Pairing Heap******************/
 		{
 			startTime = System.currentTimeMillis();
@@ -117,7 +150,6 @@ public class Gen_huffman_code {
 			endTime   = System.currentTimeMillis();
 			double totalTime_PH = (endTime - startTime)/10;
 			System.out.println(totalTime_PH);
-		}
-		}
+		}}
 	}
 }

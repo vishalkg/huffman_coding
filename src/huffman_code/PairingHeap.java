@@ -1,5 +1,7 @@
 package huffman_code;
 
+import java.util.ArrayList;
+
 class PairingHeap {
 	
 	public void stub(){
@@ -29,6 +31,27 @@ class PairingHeap {
 			root = new_node;
 		else 
 			root = merge(root,new_node);
+	}
+	
+	public Node del_min(){
+		if (is_empty())
+			return null;
+		else{
+			Node x = new Node(0,-1);
+			x = root.get_node();
+			root = root.get_left();
+			PairNode next = new PairNode(0, -1);
+			next = root.get_next();
+			root.set_next(null);
+			while(next!=null){
+				PairNode temp = new PairNode(0,-1);
+				temp = next;
+				next = next.get_next();
+				temp.set_next(null);
+				root = merge(root,temp);
+			}
+			return x;
+		}
 	}
 	
 	private PairNode merge(PairNode old_node, PairNode new_node){

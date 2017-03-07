@@ -2,38 +2,45 @@ package huffman_code;
 
 public class PairNode {
 
-	private int freq = 0;
-	private int message = -1;
+	private Node n = new Node(0,-1);
 	private PairNode l;
 	private PairNode next;
 	private PairNode prev;
 	
 	public PairNode (int freq, int message) {
-		this.freq = freq;
-		this.message = message;
+		this.n.set_freq(freq);
+		this.n.set_msg(message);
 		this.l = null;
 		this.next = null;
 		this.prev = null;
 	}
 	
 	public int get_freq() {
-		return this.freq;
+		return this.n.get_freq();
 	}
 	
 	public int get_msg() {
-		return this.message;
+		return this.n.get_msg();
 	}
 	
 	public void set_freq(int freq){
-		this.freq = freq;
+		this.n.set_freq(freq);
 	}
 	
 	public void set_msg(int msg){
-		this.message = msg;
+		this.n.set_msg(msg);
 	}
 	
 	public PairNode get_left(){
 		return this.l;
+	}
+	
+	public Node get_node(){
+		return this.n;
+	}
+	
+	public void set_node(Node x){
+		this.n = x;
 	}
 	
 	public PairNode get_next(){
@@ -53,6 +60,6 @@ public class PairNode {
 	}
 	
 	public void set_prev(PairNode x){
-		this.set_prev(x);
+		this.prev = x;
 	}
 }
