@@ -8,6 +8,7 @@ import java.util.Arrays;
 
 public class Gen_huffman_code {
 
+	public static int count;
 	public static void gen_codes(Node n, String code){
 		//System.out.println("Curr Node Freq: "+n.get_freq());
 		if (n.get_msg() != -1){
@@ -23,7 +24,7 @@ public class Gen_huffman_code {
 	public static void build_tree_using_4way_heap(int[] freq_table) {
 
 		/** Initially create a min binary heap with single node trees **/
-		D_aryHeap min_4Wayheap = new D_aryHeap(freq_table.length,4);
+		D_aryHeap min_4Wayheap = new D_aryHeap(count,4);
 		for (int i=0;i<freq_table.length;i++){
 			if (freq_table[i]!=0){
 				Node n = new Node(freq_table[i], i);
@@ -83,7 +84,7 @@ public class Gen_huffman_code {
 	public static void build_tree_using_binary_heap(int[] freq_table) {
 
 		/** Initially create a min binary heap with single node trees **/
-		BinaryHeap min_heap = new BinaryHeap(freq_table.length);
+		BinaryHeap min_heap = new BinaryHeap(count);
 		for (int i=0;i<freq_table.length;i++){
 			if (freq_table[i]!=0){
 				Node n = new Node(freq_table[i], i);
@@ -129,6 +130,7 @@ public class Gen_huffman_code {
 			if (!line.equals("")){
 				int next_value = Integer.parseInt(line.toString());
 				freq_table[next_value]++;
+				if (freq_table[next_value]==1) count++;
 			}
 		}
 		System.out.print("Done.\n");
