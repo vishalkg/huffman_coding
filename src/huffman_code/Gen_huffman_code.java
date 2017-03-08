@@ -21,6 +21,7 @@ public class Gen_huffman_code {
 	}
 	
 	public static void build_tree_using_pairing_heap(int[] freq_table) {
+		
 		/** Initially create a min pairing heap with single node trees **/
 		PairingHeap min_pairingheap = new PairingHeap();
 		for (int i=0;i<freq_table.length;i++){
@@ -30,8 +31,8 @@ public class Gen_huffman_code {
 			}
 		}
 		
-		/** Now we have a min heap of trees having single nodes only	**
-		 ** Now we will combine all to build a single huffman tree		**/
+		/** Now we have a min pairing heap of trees having single nodes only	**
+		 ** Now we will combine all to build a single huffman tree				**/
 		while(min_pairingheap.get_root().get_left()!=null){
 			Node internal = new Node(0,-1);
 			internal.set_left(min_pairingheap.del_min());internal.get_left().set_parent(internal);
