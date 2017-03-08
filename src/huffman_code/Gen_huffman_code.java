@@ -38,12 +38,12 @@ public class Gen_huffman_code {
 			internal.set_left(min_4Wayheap.del_min());internal.get_left().set_parent(internal);
 			internal.set_right(min_4Wayheap.del_min());internal.get_right().set_parent(internal);
 			internal.set_freq(internal.get_left().get_freq()+internal.get_right().get_freq());
-			/**
+			/**/
 			System.out.println(internal.get_left().get_freq()+
 					":"+internal.get_left().get_msg()+
 					"|"+internal.get_right().get_freq()+
 					":"+internal.get_right().get_msg());
-			 **/
+			 /**/
 			min_4Wayheap.insert(internal);
 		}
 		String code = "";
