@@ -44,8 +44,7 @@ class BinaryHeap {
 		}
 	}
 	
-	public Node del_min(){
-		
+	public Node del_min(){	
 		if (is_empty())
 			return null;
 		else{

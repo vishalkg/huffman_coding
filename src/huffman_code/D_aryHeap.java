@@ -21,6 +21,13 @@ class D_aryHeap {
 		return (heap_size == 0);
 	}
 	
+	public Node get_root(){
+		if (is_empty())
+			return null;
+		else
+			return data[0];
+	}
+	
 	public void insert(Node node){
 		if (heap_size==data.length)
 			System.out.println("Size Overflow");
@@ -58,37 +65,39 @@ class D_aryHeap {
 			}
 		}
 	}
-	
+
 	private void manage_heap_downwards(int node_index){
-		int l_index,r_index,min_index;
 		Node temp = new Node(0,-1);
-		l_index = get_left_child_index(node_index);
-		r_index = get_right_child_index(node_index);
-		if (r_index>=heap_size){
-			if (l_index>=heap_size)
-				return;
-			else
-				min_index = l_index;
-		}
-		else {
-			if (data[l_index].get_freq() <= data[r_index].get_freq())
-				min_index = l_index;
-			else
-				min_index = r_index;
-		}
-		if (data[node_index].get_freq() > data[min_index].get_freq()){
-			temp = data[min_index];
-			data[min_index] = data[node_index];
-			data[node_index] = temp;
-			manage_heap_downwards(min_index);
+		int min_index;
+		if (get_k_child_index(node_index, 1)<heap_size){
+			min_index = get_min_child_index(node_index);
+			if (data[node_index].get_freq() >= data[min_index].get_freq()){
+				temp = data[min_index];
+				data[min_index] = data[node_index];
+				data[node_index] = temp;
+				manage_heap_downwards(min_index);
+			}
 		}
 	}
-	
+
 	private int get_parent_index(int node_index) {
 		return (node_index-1)/d;
 	}
 	
 	private int get_k_child_index(int node_index, int k) {
 		return d*node_index+k;
+	}
+	
+	private int get_min_child_index(int node_index) {
+		int min_index = get_k_child_index(node_index, 1);
+		int k = 2;
+		int k_index = get_k_child_index(node_index, k);
+		while (k<=d && k_index<heap_size) {
+			if (data[min_index].get_freq()>data[k_index].get_freq()){
+				min_index = k_index;
+			}
+			k++;
+		}
+		return min_index;
 	}
 }
