@@ -1,6 +1,6 @@
 package huffman_code;
 
-class FourWayHeap {
+class D_aryHeap {
 	
 	public void stub(){
 		System.out.println("Reached stub func");
