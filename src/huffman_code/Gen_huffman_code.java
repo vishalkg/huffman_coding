@@ -12,7 +12,7 @@ public class Gen_huffman_code {
 	public static void gen_codes(Node n, String code){
 		//System.out.println("Curr Node Freq: "+n.get_freq());
 		if (n.get_msg() != -1){
-			System.out.println(n.get_msg()+"==>"+code);
+			//System.out.println(n.get_msg()+"==>"+code);
 			return;
 		}
 		else{
@@ -39,12 +39,12 @@ public class Gen_huffman_code {
 			internal.set_left(min_4Wayheap.del_min());internal.get_left().set_parent(internal);
 			internal.set_right(min_4Wayheap.del_min());internal.get_right().set_parent(internal);
 			internal.set_freq(internal.get_left().get_freq()+internal.get_right().get_freq());
-			/**/
+			/**
 			System.out.println(internal.get_left().get_freq()+
 					":"+internal.get_left().get_msg()+
 					"|"+internal.get_right().get_freq()+
 					":"+internal.get_right().get_msg());
-			 /**/
+			 **/
 			min_4Wayheap.insert(internal);
 		}
 		String code = "";
@@ -136,7 +136,7 @@ public class Gen_huffman_code {
 		System.out.print("Done.\n");
 
 		long startTime,endTime;
-		int num_trials = 1;
+		int num_trials = 10;
 
 		/****************** Binary Heap ******************/
 		{
@@ -164,8 +164,8 @@ public class Gen_huffman_code {
 			}
 			System.out.print(" Done\n");
 			endTime   = System.currentTimeMillis();
-			double totalTime_BH = (endTime - startTime)/num_trials;
-			System.out.println("Average Time: "+totalTime_BH);
+			double totalTime_PH = (endTime - startTime)/num_trials;
+			System.out.println("Average Time: "+totalTime_PH);
 		}
 
 
@@ -179,8 +179,8 @@ public class Gen_huffman_code {
 			}
 			System.out.print(" Done\n");
 			endTime   = System.currentTimeMillis();
-			double totalTime_BH = (endTime - startTime)/num_trials;
-			System.out.println("Average Time: "+totalTime_BH);
+			double totalTime_4WH = (endTime - startTime)/num_trials;
+			System.out.println("Average Time: "+totalTime_4WH);
 		}
 	}
 }

@@ -97,6 +97,7 @@ class D_aryHeap {
 				min_index = k_index;
 			}
 			k++;
+			k_index = get_k_child_index(node_index, k);
 		}
 		return min_index;
 	}
