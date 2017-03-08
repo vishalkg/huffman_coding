@@ -1,4 +1,10 @@
-all: Node.class PairNode.class BinaryHeap.class PairingHeap.class D_aryHeap.class Gen_huffman_code.class
+all: bin Node.class PairNode.class BinaryHeap.class PairingHeap.class D_aryHeap.class Gen_huffman_code.class
+
+bin:
+	if [ ! -d "bin" ];then	\
+		mkdir bin; 			\
+	fi
+
 Node.class: src/huffman_code/Node.java
 	javac -d ./bin -classpath ./bin src/huffman_code/Node.java
 
@@ -18,4 +24,4 @@ Gen_huffman_code.class: src/huffman_code/Gen_huffman_code.java
 	javac -d ./bin -classpath ./bin src/huffman_code/Gen_huffman_code.java
 
 clean:
-	rm -f ./bin/huffman_code/*.class
+	rm -rf ./bin
