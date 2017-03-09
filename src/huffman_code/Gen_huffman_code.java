@@ -2,8 +2,10 @@ package huffman_code;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Gen_huffman_code {
@@ -21,7 +23,7 @@ public class Gen_huffman_code {
 		}
 	}
 
-	public static void build_tree_using_4way_heap(int[] freq_table) {
+	public static Node build_tree_using_4way_heap(int[] freq_table) {
 
 		/** Initially create a min binary heap with single node trees **/
 		D_aryHeap min_4Wayheap = new D_aryHeap(count,4);
@@ -49,9 +51,10 @@ public class Gen_huffman_code {
 		}
 		String code = "";
 		gen_codes(min_4Wayheap.get_root(),code);
+		return min_4Wayheap.get_root();
 	}
 
-	public static void build_tree_using_pairing_heap(int[] freq_table) {
+	public static Node build_tree_using_pairing_heap(int[] freq_table) {
 
 		/** Initially create a min pairing heap with single node trees **/
 		PairingHeap min_pairingheap = new PairingHeap();
@@ -79,9 +82,10 @@ public class Gen_huffman_code {
 		}
 		String code = "";
 		gen_codes(min_pairingheap.get_root().get_node(),code);
+		return min_pairingheap.get_root().get_node();
 	}
 
-	public static void build_tree_using_binary_heap(int[] freq_table) {
+	public static Node build_tree_using_binary_heap(int[] freq_table) {
 
 		/** Initially create a min binary heap with single node trees **/
 		BinaryHeap min_heap = new BinaryHeap(count);
@@ -109,35 +113,42 @@ public class Gen_huffman_code {
 		}
 		String code = "";
 		gen_codes(min_heap.get_root(),code);
+		return min_heap.get_root();
 	}
 
+	public static int[] build_freq_table(ArrayList<Integer> freq_data){
+		int[] freq_table = new int[20000000];
+		Arrays.fill(freq_table, 0);	
+		System.out.print("Building Freq Table ... ");
+		for (int i=0;i<freq_data.size();i++){
+			freq_table[freq_data.get(i)]++;
+			if (freq_table[freq_data.get(i)]==1) count++;
+		}
+		return freq_table;
+	}
+	
 	public static void main (String[] args) throws InterruptedException, IOException {
 
-		/*****************************************************/
 		/**Read the input file and build the frequency table**/
-		File freq_data = null;
+		File input_file = null;
 		if (args.length == 0){
 			System.out.println("Input not provided ... terminating");
 			return;
 		}
-		freq_data = new File(args[0]);
-		BufferedReader reader = new BufferedReader(new FileReader(freq_data));
-		int[] freq_table = new int[20000000];
-		Arrays.fill(freq_table, 0);
-		String line;
+		input_file = new File(args[0]);
+		BufferedReader reader = new BufferedReader(new FileReader(input_file));
 		System.out.print("Reading input file ... ");
-		while ((line = reader.readLine())!=null) {
-			if (!line.equals("")){
-				int next_value = Integer.parseInt(line.toString());
-				freq_table[next_value]++;
-				if (freq_table[next_value]==1) count++;
-			}
-		}
+		String line;
+		ArrayList<Integer> freq_data = new ArrayList<>();
+		while ((line = reader.readLine())!=null)
+			if (!line.equals(""))
+				freq_data.add(Integer.parseInt(line.toString()));
+		
+		int[] freq_table = build_freq_table(freq_data);
 		System.out.print("Done.\n");
-
 		long startTime,endTime;
 		int num_trials = 10;
-
+		Node huffman_tree = new Node(0,-1);
 		/****************** Binary Heap ******************/
 		{
 			System.out.print("Building Huffman Tree using Binary Heap ... \nTrial:");
@@ -145,7 +156,8 @@ public class Gen_huffman_code {
 
 			for (int i=0;i<num_trials;i++) {
 				System.out.print((i+1)+".. ");
-				build_tree_using_binary_heap(freq_table);
+				
+				huffman_tree = build_tree_using_binary_heap(freq_table);
 			}
 			System.out.print(" Done\n");
 			endTime   = System.currentTimeMillis();
@@ -160,7 +172,7 @@ public class Gen_huffman_code {
 			startTime = System.currentTimeMillis();
 			for (int i=0;i<num_trials;i++) {
 				System.out.print((i+1)+".. ");
-				build_tree_using_pairing_heap(freq_table);
+				huffman_tree = build_tree_using_pairing_heap(freq_table);
 			}
 			System.out.print(" Done\n");
 			endTime   = System.currentTimeMillis();
@@ -175,7 +187,7 @@ public class Gen_huffman_code {
 			startTime = System.currentTimeMillis();
 			for (int i=0;i<num_trials;i++) {
 				System.out.print((i+1)+".. ");
-				build_tree_using_4way_heap(freq_table);
+				huffman_tree = build_tree_using_4way_heap(freq_table);
 			}
 			System.out.print(" Done\n");
 			endTime   = System.currentTimeMillis();
