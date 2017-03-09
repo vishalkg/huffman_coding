@@ -4,7 +4,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Encoder {
+public class encoder {
 	
 	public static void main (String[] args) throws InterruptedException, IOException {
 		/**Read the input file and build the frequency table**/
