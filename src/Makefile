@@ -1,4 +1,4 @@
-all: Node.class PairNode.class BinaryHeap.class PairingHeap.class D_aryHeap.class Gen_huffman_code.class Encoder.class
+all: Node.class PairNode.class BinaryHeap.class PairingHeap.class D_aryHeap.class Gen_huffman_code.class encoder.class
 
 Node.class: Node.java
 	javac -d . -classpath . Node.java
