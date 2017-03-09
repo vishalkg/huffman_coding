@@ -156,7 +156,6 @@ public class Gen_huffman_code {
 
 			for (int i=0;i<num_trials;i++) {
 				System.out.print((i+1)+".. ");
-				
 				huffman_tree = build_tree_using_binary_heap(freq_table);
 			}
 			System.out.print(" Done\n");
