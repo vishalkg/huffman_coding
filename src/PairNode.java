@@ -1,5 +1,3 @@
-package huffman_code;
-
 public class PairNode {
 
 	private Node n = new Node(0,-1);

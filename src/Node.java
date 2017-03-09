@@ -1,5 +1,3 @@
-package huffman_code;
-
 public class Node{
 
 	private Node p;

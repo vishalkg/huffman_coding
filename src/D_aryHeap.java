@@ -1,5 +1,3 @@
-package huffman_code;
-
 class D_aryHeap {
 	
 	public void stub(){

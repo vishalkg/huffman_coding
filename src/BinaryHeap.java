@@ -1,5 +1,3 @@
-package huffman_code;
-
 class BinaryHeap {
 
 	private Node[] data;

@@ -1,5 +1,3 @@
-package huffman_code;
-
 class PairingHeap {
 	
 	public void stub(){
