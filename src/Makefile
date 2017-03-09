@@ -18,8 +18,8 @@ D_aryHeap.class: D_aryHeap.java
 Gen_huffman_code.class: Gen_huffman_code.java
 	javac -d . -classpath . Gen_huffman_code.java
 
-Encoder.class: Encoder.java
-	javac -d . -classpath . Encoder.java
+encoder.class: encoder.java
+	javac -d . -classpath . encoder.java
 
 clean:
 	rm -rf ./*.class
