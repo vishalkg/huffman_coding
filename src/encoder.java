@@ -15,7 +15,7 @@ public class encoder {
 		// TODO Auto-generated method stub
 		if (huffman_tree.get_msg() != -1){
 			code_table[huffman_tree.get_msg()] = code;
-			output.write(huffman_tree.get_msg()+"==>"+code+"\n");
+			output.write(huffman_tree.get_msg()+" "+code+"\n");
 			return;
 		}
 		else{
@@ -62,8 +62,11 @@ public class encoder {
 		fillNwrite_code_table(huffman_tree,"",code_table,output);
 		output.close();
 		System.out.print("Done\n");
+		
+		/**
 		for(int i=0;i<code_table.length;i++)
 			if (code_table[i]!="-1")
-				System.out.println(i+"==>"+code_table[i]);
+				System.out.println(i+" ==> "+code_table[i]);
+		**/
 	}
 }
