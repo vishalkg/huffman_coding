@@ -1,6 +1,5 @@
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
@@ -14,7 +13,6 @@ import java.util.Collections;
 public class encoder {
 
 	private static void fillNwrite_code_table(Node huffman_tree, String code, String[] code_table, BufferedWriter output) throws IOException {
-		// TODO Auto-generated method stub
 		if (huffman_tree.get_msg() != -1){
 			code_table[huffman_tree.get_msg()] = code;
 			output.write(huffman_tree.get_msg()+" "+code+"\n");
