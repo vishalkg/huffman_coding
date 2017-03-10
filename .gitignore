@@ -3,3 +3,5 @@
 /src/*.class
 /code_table.txt
 /src/code_table.txt
+/encoded.bin
+/srs/encoded.bin
