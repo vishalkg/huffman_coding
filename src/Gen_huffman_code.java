@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 public class Gen_huffman_code {
 
@@ -115,7 +116,7 @@ public class Gen_huffman_code {
 	}
 
 	public static int[] build_freq_table(ArrayList<Integer> freq_data){
-		int[] freq_table = new int[20000000];
+		int[] freq_table = new int[Collections.max(freq_data)+1];
 		Arrays.fill(freq_table, 0);	
 		System.out.print("Building Freq Table ... ");
 		for (int i=0;i<freq_data.size();i++){
@@ -125,6 +126,7 @@ public class Gen_huffman_code {
 		return freq_table;
 	}
 	
+	@SuppressWarnings("resource")
 	public static void main (String[] args) throws InterruptedException, IOException {
 
 		/**Read the input file and build the frequency table**/
