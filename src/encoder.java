@@ -30,9 +30,9 @@ public class encoder {
 		for (int i=0;i<freq_data.size();i++){
 			String symbol = code_table[freq_data.get(i)];
 			for (int j=0;j<symbol.length();j++){
-				char c = symbol.charAt(j);
 				buff.set(bitIndex);
-				if (c == '0') buff.clear(bitIndex);
+				if (symbol.charAt(j) == '0')
+					buff.clear(bitIndex);
 				bitIndex++;
 			}
 		}
