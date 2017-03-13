@@ -26,3 +26,4 @@ decoder.class: decoder.java
 
 clean:
 	rm -rf ./*.class
+	rm encoded.bin decoded.txt code_table.txt

@@ -1,10 +1,11 @@
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class decoder {
 
@@ -53,7 +54,7 @@ public class decoder {
 			System.out.println("   -args[1]: code_table.txt");
 			return;
 		}
-		System.out.print("Reading code_table.txt\n");
+		System.out.print("Reading code_table.txt .. \n");
 		System.out.print("Building huffman tree .. ");
 		File input = new File(args[1]);
 		BufferedReader br = new BufferedReader(new FileReader(input));
@@ -61,38 +62,32 @@ public class decoder {
 		System.out.print("Done.\n");
 
 		System.out.print("Reading encoded.bin .. \n");
-		FileInputStream fis = new FileInputStream(new File(args[0]));
-		int next_byte;
-		String code_string="";
-		while (true){
-			next_byte = fis.read();
-			if (next_byte==-1) break;
-			String reverse = new StringBuffer(String.format("%8s",Integer.toBinaryString(next_byte)).replace(' ', '0')).reverse().toString();
-			code_string = code_string+reverse;
-		}
-		fis.close();
-		
-		System.out.print("Decoding encoded.bin .. \n");
-		System.out.print("Generating decoded.txt .. ");
+		byte[] code_bin = Files.readAllBytes(Paths.get(args[0]));
+		System.out.print("Generating decoded.txt .. ");;
 		File decoded = new File("decoded.txt");
 		BufferedWriter output = new BufferedWriter(new FileWriter(decoded));
 		Node curr = huffman_tree;
-		int i = 0;
-		while(i<=code_string.length()){
-			if (curr.get_msg()!=-1){
+		for (int i=0;i<code_bin.length;i++){
+			int j = 0;
+			if (code_bin[i]<0) code_bin[i] += 256;
+			while (j<8){
+				if (curr.get_msg()!=-1){
+					output.write(curr.get_msg()+"\n");
+					curr = huffman_tree;
+				}
+				else{
+					int next_bit = (code_bin[i]>>j) & 0x1;
+					if (next_bit==1)
+						curr = curr.get_right();
+					else
+						curr = curr.get_left();
+					j++;
+				}
+			}
+			if (i==code_bin.length-1 && j==8)
 				output.write(curr.get_msg()+"\n");
-				curr = huffman_tree;	
-				if (i==code_string.length()) break;
-			}
-			else {
-				if (code_string.charAt(i)=='0')
-					curr = curr.get_left();
-				else
-					curr = curr.get_right();
-				i++;
-			}
 		}
 		output.close();
-		System.out.print("Done.\n");
+		System.out.println("Done.\n");
 	}
 }
