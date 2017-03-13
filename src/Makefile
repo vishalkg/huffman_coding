@@ -1,4 +1,4 @@
-all: Node.class PairNode.class BinaryHeap.class PairingHeap.class D_aryHeap.class Gen_huffman_code.class encoder.class
+all: Node.class PairNode.class BinaryHeap.class PairingHeap.class D_aryHeap.class Gen_huffman_code.class encoder.class decoder.class
 
 Node.class: Node.java
 	javac -d . -classpath . Node.java
@@ -20,6 +20,9 @@ Gen_huffman_code.class: Gen_huffman_code.java
 
 encoder.class: encoder.java
 	javac -d . -classpath . encoder.java
+
+decoder.class: decoder.java
+	javac -d . -classpath . decoder.java
 
 clean:
 	rm -rf ./*.class
