@@ -33,15 +33,18 @@ public class decoder {
 
 	}
 
-	public static Node build_huffTree_using_codeTable_txt(BufferedReader br) throws IOException {
+	public static Node build_huffTree_using_codeTable_txt(String file) throws IOException {
 		Node huff = new Node(0,-1);
+		System.out.print("Reading code_table.txt .. ");
+		File input = new File(file);
+		BufferedReader br = new BufferedReader(new FileReader(input));
 		String line;
 		while ((line = br.readLine())!=null){
 			int msg = Integer.parseInt(line.split(" ")[0]);
 			String code = line.split(" ")[1];
 			add_node(huff,msg,code);
 		}
-
+		br.close();
 		return huff;
 	}
 
@@ -54,15 +57,15 @@ public class decoder {
 			System.out.println("   -args[1]: code_table.txt");
 			return;
 		}
-		System.out.print("Reading code_table.txt .. \n");
-		System.out.print("Building huffman tree .. ");
-		File input = new File(args[1]);
-		BufferedReader br = new BufferedReader(new FileReader(input));
-		Node huffman_tree = build_huffTree_using_codeTable_txt(br);
+		
+		System.out.print("Building huffman tree from code_table.txt .. \n");
+		Node huffman_tree = build_huffTree_using_codeTable_txt(args[1]);
 		System.out.print("Done.\n");
 
-		System.out.print("Reading encoded.bin .. \n");
+		System.out.print("Reading encoded.bin .. ");
 		byte[] code_bin = Files.readAllBytes(Paths.get(args[0]));
+		System.out.print("Done.\n");
+		
 		System.out.print("Generating decoded.txt .. ");;
 		File decoded = new File("decoded.txt");
 		BufferedWriter output = new BufferedWriter(new FileWriter(decoded));
