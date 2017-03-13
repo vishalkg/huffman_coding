@@ -35,7 +35,7 @@ Generating code_table.txt .. Done.
 Generating encoded.bin .. Done.
 ```
 
-As a proof of concept, we will reconstruct out input using code_table.txt and encoded.bin
+As a proof of concept, we will reconstruct our input using code_table.txt and encoded.bin
 
 * decoder.java: Takes in input encoded.bin and code_table.txt and produces decoded.txt which is exactly the same as sample_input_large.txt as used in encoder.
 Usage:
@@ -48,3 +48,18 @@ Generating decoded.txt .. Done.
 ```
 
 Do `diff decoded.txt ../sample_input_large.txt` to check correctness.
+
+Clone repository and make:
+```
+~:$ git clone https://github.com/vishalkg/huffman_coding.git
+~:$ cd huffman_coding/src
+~:src$ make
+javac -d . -classpath . Node.java
+javac -d . -classpath . PairNode.java
+javac -d . -classpath . BinaryHeap.java
+javac -d . -classpath . PairingHeap.java
+javac -d . -classpath . D_aryHeap.java
+javac -d . -classpath . Gen_huffman_code.java
+javac -d . -classpath . encoder.java
+javac -d . -classpath . decoder.java
+```
