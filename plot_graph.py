@@ -2,10 +2,10 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 data = np.zeros((5,4), dtype=np.int64)
-data[:,0] = [1,2,3,4,5]
-data[:,1] = [586,580,584,585,584]
-data[:,2] = [1071,1055,1062,1051,1057]
-data[:,3] = [527,532,526,525,527]
+data[:,0] = [1,2,3,4,5]                 # Run Index
+data[:,1] = [586,580,584,585,584]       # BinaryHeap data
+data[:,2] = [1071,1055,1062,1051,1057]  # PairingHeap data
+data[:,3] = [527,532,526,525,527]       # 4WayHaep data
 
 plt.xticks(data[:,0])
 binH, = plt.plot(data[:,0],data[:,1],'r-o',label='Binary Heap')
