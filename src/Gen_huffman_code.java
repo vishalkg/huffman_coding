@@ -146,50 +146,50 @@ public class Gen_huffman_code {
 		int[] freq_table = build_freq_table(freq_data);
 		System.out.print("Done.\n");
 		long startTime,endTime;
-		int num_trials = 10;
+		int num_runs = 10;
 		Node huffman_tree = new Node(0,-1);
 		/****************** Binary Heap ******************/
 		{
-			System.out.print("Building Huffman Tree using Binary Heap ... \nTrial:");
+			System.out.print("Building Huffman Tree using Binary Heap ... \nRun:");
 			startTime = System.currentTimeMillis();
 
-			for (int i=0;i<num_trials;i++) {
+			for (int i=0;i<num_runs;i++) {
 				System.out.print((i+1)+".. ");
 				huffman_tree = build_tree_using_binary_heap(freq_table);
 			}
 			System.out.print(" Done\n");
 			endTime   = System.currentTimeMillis();
-			double totalTime_BH = (endTime - startTime)/num_trials;
+			double totalTime_BH = (endTime - startTime)/num_runs;
 			System.out.println("Average Time: "+totalTime_BH);
 		}
 
 
 		/*******************Pairing Heap********************/
 		{
-			System.out.print("Building Huffman Tree using Pairing Heap ... \nTrial:");
+			System.out.print("Building Huffman Tree using Pairing Heap ... \nRun:");
 			startTime = System.currentTimeMillis();
-			for (int i=0;i<num_trials;i++) {
+			for (int i=0;i<num_runs;i++) {
 				System.out.print((i+1)+".. ");
 				huffman_tree = build_tree_using_pairing_heap(freq_table);
 			}
 			System.out.print(" Done\n");
 			endTime   = System.currentTimeMillis();
-			double totalTime_PH = (endTime - startTime)/num_trials;
+			double totalTime_PH = (endTime - startTime)/num_runs;
 			System.out.println("Average Time: "+totalTime_PH);
 		}
 
 
 		/*******************4 Way Heap******************/
 		{
-			System.out.print("Building Huffman Tree using 4-ary Heap ... \nTrial:");
+			System.out.print("Building Huffman Tree using 4-ary Heap ... \nRun:");
 			startTime = System.currentTimeMillis();
-			for (int i=0;i<num_trials;i++) {
+			for (int i=0;i<num_runs;i++) {
 				System.out.print((i+1)+".. ");
 				huffman_tree = build_tree_using_4way_heap(freq_table);
 			}
 			System.out.print(" Done\n");
 			endTime   = System.currentTimeMillis();
-			double totalTime_4WH = (endTime - startTime)/num_trials;
+			double totalTime_4WH = (endTime - startTime)/num_runs;
 			System.out.println("Average Time: "+totalTime_4WH);
 		}
 	}
