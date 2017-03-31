@@ -12,7 +12,7 @@ binH, = plt.plot(data[:,0],data[:,1],'r-o',label='Binary Heap')
 pairH, = plt.plot(data[:,0],data[:,2],'b-o',label='Pairing Heap')
 fourH, = plt.plot(data[:,0],data[:,3],'g-o',label='4-Way Heap')
 
-plt.xlabel('Run Index')
+plt.xlabel('Trial Index')
 plt.ylabel('Average Time')
 plt.title('Average Time plot for different Priority Queues')
 plt.legend(handles=[binH,pairH,fourH])
