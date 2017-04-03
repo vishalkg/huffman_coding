@@ -6,4 +6,5 @@
 /encoded.bin
 /src/encoded.bin
 /decoded.txt
-src/decoded.txt
+/src/decoded.txt
+/.DS_Store
