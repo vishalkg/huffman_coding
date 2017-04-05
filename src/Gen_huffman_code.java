@@ -34,7 +34,7 @@ public class Gen_huffman_code {
 
 		/** Now we have a min heap of trees having single nodes only	**
 		 ** Now we will combine all to build a single huffman tree		**/
-		while (min_4Wayheap.heap_size != 1){
+		while (min_4Wayheap.heap_size != 4){
 			Node internal = new Node(0,-1);
 			internal.set_left(min_4Wayheap.del_min());internal.get_left().set_parent(internal);
 			internal.set_right(min_4Wayheap.del_min());internal.get_right().set_parent(internal);

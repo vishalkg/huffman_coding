@@ -10,20 +10,20 @@ class D_aryHeap {
 	
 	/** Constructor **/
 	public D_aryHeap(int num_nodes, int d){
-		this.data = new Node[num_nodes];
+		this.data = new Node[num_nodes+3];
 		this.d = d;
-		this.heap_size = 0;
+		this.heap_size = 3;
 	}
 	
 	public boolean is_empty() {
-		return (heap_size == 0);
+		return (heap_size == 3);
 	}
 	
 	public Node get_root(){
 		if (is_empty())
 			return null;
 		else
-			return data[0];
+			return data[3];
 	}
 	
 	public void insert(Node node){
@@ -41,11 +41,11 @@ class D_aryHeap {
 			return null;
 		else{
 			Node min_node = new Node(0,-1);
-			min_node = data[0];
-			data[0] = data[heap_size-1];
+			min_node = data[3];
+			data[3] = data[heap_size-1];
 			heap_size--;
-			if (heap_size>0)
-				manage_heap_downwards(0);
+			if (heap_size>3)
+				manage_heap_downwards(3);
 			return min_node;
 		}
 	}
@@ -53,7 +53,7 @@ class D_aryHeap {
 	private void manage_heap_upwards(int node_index) {
 		int parent_index;
 		Node temp = new Node(0,-1);
-		if (node_index!=0){
+		if (node_index!=3){
 			parent_index = get_parent_index(node_index);
 			if (data[parent_index].get_freq() >= data[node_index].get_freq()){
 				temp = data[parent_index];
@@ -79,11 +79,11 @@ class D_aryHeap {
 	}
 
 	private int get_parent_index(int node_index) {
-		return (node_index-1)/d;
+		return ((node_index-1-3)/d)+3;
 	}
 	
 	private int get_k_child_index(int node_index, int k) {
-		return d*node_index+k;
+		return d*(node_index-3)+k+3;
 	}
 	
 	private int get_min_child_index(int node_index) {
