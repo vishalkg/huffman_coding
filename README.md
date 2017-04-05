@@ -13,13 +13,13 @@ Usage:
 ~:src$ java Gen_huffman_code ../sample_input_large.txt 
 Reading input file ... Building Freq Table ... Done.
 Building Huffman Tree using Binary Heap ... 
-Trial:1.. 2.. 3.. 4.. 5.. 6.. 7.. 8.. 9.. 10..  Done
+Run:1.. 2.. 3.. 4.. 5.. 6.. 7.. 8.. 9.. 10..  Done
 Average Time: 1663.0
 Building Huffman Tree using Pairing Heap ... 
-Trial:1.. 2.. 3.. 4.. 5.. 6.. 7.. 8.. 9.. 10..  Done
+Run:1.. 2.. 3.. 4.. 5.. 6.. 7.. 8.. 9.. 10..  Done
 Average Time: 3417.0
 Building Huffman Tree using 4-ary Heap ... 
-Trial:1.. 2.. 3.. 4.. 5.. 6.. 7.. 8.. 9.. 10..  Done
+Run:1.. 2.. 3.. 4.. 5.. 6.. 7.. 8.. 9.. 10..  Done
 Average Time: 1291.0
 ```
 
